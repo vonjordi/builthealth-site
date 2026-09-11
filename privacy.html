@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — Built Health</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@500;600;700;800&display=swap">
+  <style>
+    * { margin: 0; box-sizing: border-box; }
+    body { font-family: 'Geist', system-ui, sans-serif; background: #FFFFFF; color: #14271D; line-height: 1.65; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+    a.home { color: #2F7D4A; font-weight: 700; text-decoration: none; font-size: 14px; }
+    h1 { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; margin: 18px 0 4px; }
+    .updated { color: #607065; font-size: 13.5px; margin-bottom: 28px; }
+    h2 { font-size: 19px; font-weight: 800; margin: 30px 0 8px; color: #102219; }
+    p, li { font-size: 15px; color: #2E3B32; }
+    ul { padding-left: 22px; }
+    li { margin: 5px 0; }
+    .card { background: #F4F8F3; border: 1px solid #DFE7DD; border-radius: 12px; padding: 16px 18px; margin: 16px 0; }
+    strong { color: #102219; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="home" href="/">← Built Health</a>
+    <h1>Privacy Policy</h1>
+    <div class="updated">Last updated: September 10, 2026</div>
+
+    <p>Built Health is a consumer wellness app for nutrition logging, medication and vitamin tracking, reminders, and symptom notes. It is not a medical device, provider portal, payer workflow, or emergency service, and it never provides medical advice, diagnosis, or treatment instructions.</p>
+
+    <h2>Data we handle</h2>
+    <ul>
+      <li>Account identifiers from our authentication provider (Supabase Auth).</li>
+      <li>Meal logs, nutrition observations, resolved nutrition estimates, evidence trails, and conflicts.</li>
+      <li>Barcode lookups and Open Food Facts source payloads, stored separately from your corrections.</li>
+      <li>Nutrition-label photos, meal photos, and medication-bottle photos <strong>only while they are being processed</strong> for OCR or identification — they are analyzed and discarded, not stored.</li>
+      <li>Voice input is transcribed on your device or by your device's operating system; we receive the resulting text, not stored audio recordings.</li>
+      <li>Medication, vitamin, dose, injection-site, reminder, refill, and symptom records.</li>
+      <li>Health diary entries you write, their AI-generated reflections, and a derived diary memory summary.</li>
+      <li>Recipes you save and your food preferences (allergies, dislikes, tolerances).</li>
+      <li>Subscription tier and entitlement status.</li>
+    </ul>
+
+    <h2>How data is used</h2>
+    <ul>
+      <li>To resolve meals into nutrition estimates with an audit trail.</li>
+      <li>To preserve your daily protein and nutrition history.</li>
+      <li>To run medication and vitamin schedules, reminders, refill estimates, and personal symptom notes.</li>
+      <li>To organize your diary entries into patterns from your own words, questions to bring to your own doctor, and generic reading topics — never medical advice.</li>
+      <li>To meter cost-sensitive AI features and prevent abuse.</li>
+      <li>To improve reliability, debug errors, and protect the service.</li>
+    </ul>
+
+    <h2>AI processing</h2>
+    <p>Label OCR, meal-photo identification, meal descriptions, recipe import and generation, medication-label reading, and health-diary reflection run through Built Health's server-side functions. Calls to AI providers are configured not to retain data (<code>store:false</code>) where the provider supports it. API keys stay server-side and are never shipped inside the mobile app.</p>
+
+    <h2>Health diary</h2>
+    <p>Diary entries are private to your account. When you save an entry, Built Health processes the text server-side to produce a reflection (patterns from your own words, questions for your own doctor, generic research topics) and to maintain a derived memory summary so the app can remember your history. Reflections are structured and filtered so they never evaluate your medications, doses, or treatment decisions. You can delete any entry, or all diary data — deleting removes entries, reflections, and the derived memory.</p>
+
+    <h2>What we do not do</h2>
+    <div class="card">
+      <ul>
+        <li>We do not provide medical advice, diagnosis, or treatment instructions.</li>
+        <li>We do not sell or prescribe medication.</li>
+        <li>We do not share your data with providers, payers, employers, or advertisers.</li>
+        <li>We do not sell your data.</li>
+        <li>We do not train a personal machine-learning model from your history.</li>
+      </ul>
+    </div>
+
+    <h2>Retention and deletion</h2>
+    <p>Meal, medication, symptom, diary, and evidence records are kept until you delete them or delete your account. Photos are processed and discarded, not retained on our servers.</p>
+
+    <h2>Security</h2>
+    <p>Your data is stored behind row-level security with owner-only access policies. Cost-control and entitlement records are server-owned; the app can read your limits but cannot raise its own tier or reset usage meters.</p>
+
+    <h2>Contact</h2>
+    <p>Privacy requests and account deletion requests: <strong>privacy@builthealth.com</strong></p>
+  </div>
+</body>
+</html>

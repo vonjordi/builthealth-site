@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Built Health</title>
+  <meta name="description" content="Built Health — the most accurate food tracker alive. Keep what you built.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@500;600;700;800;900&family=Newsreader:ital,wght@1,500&display=swap">
+  <style>
+    * { margin: 0; box-sizing: border-box; }
+    body { font-family: 'Geist', system-ui, sans-serif; background: #101110; color: #F4F6F3; min-height: 100vh; display: flex; flex-direction: column; }
+    main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 48px 24px; gap: 18px; }
+    .ring { width: 96px; height: 96px; border-radius: 48px; border: 8px solid #1E2A21; border-top-color: #7BD9A0; border-right-color: #7BD9A0; transform: rotate(-45deg); }
+    h1 { font-size: clamp(34px, 7vw, 56px); font-weight: 900; letter-spacing: -1px; }
+    .tagline { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: clamp(18px, 3.5vw, 24px); color: #7BD9A0; }
+    p.sub { color: #7A837C; font-size: 15px; max-width: 480px; line-height: 1.6; font-weight: 500; }
+    .badges { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+    .badge { border: 1px solid #262B27; border-radius: 12px; padding: 10px 18px; color: #E2E8DF; font-size: 13.5px; font-weight: 700; }
+    .badge.soon { color: #647266; }
+    footer { display: flex; gap: 22px; justify-content: center; padding: 26px; border-top: 1px solid #1E2A21; }
+    footer a { color: #7A837C; font-size: 13px; font-weight: 600; text-decoration: none; }
+    footer a:hover { color: #7BD9A0; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="ring" role="img" aria-label="Built Health protein ring"></div>
+    <h1>Built Health</h1>
+    <div class="tagline">Keep what you built.</div>
+    <p class="sub">The most accurate food tracker alive. We don't guess — we ask, we ground every number in evidence, and we remember. Protein-first nutrition, medication schedules, symptoms, and a Coach that listens.</p>
+    <div class="badges">
+      <span class="badge">iPhone — App Store</span>
+      <span class="badge soon">Android — coming soon</span>
+    </div>
+  </main>
+  <footer>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/support.html">Support</a>
+  </footer>
+</body>
+</html>
