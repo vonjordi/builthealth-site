@@ -3,39 +3,292 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Built Health</title>
-  <meta name="description" content="Built Health — the most accurate food tracker alive. Keep what you built.">
+  <title>Built Health — one app for your whole health</title>
+  <meta name="description" content="Built Health asks instead of guessing. Evidence-grounded nutrition, medication schedules, symptom tracking, and a private Coach that remembers. Keep what you built.">
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <meta property="og:title" content="Built Health — one app for your whole health">
+  <meta property="og:description" content="Other apps silently guess what you ate. Built Health asks, grounds every number in evidence, and remembers.">
+  <meta property="og:image" content="https://builthealth.com/img/icon.png">
+  <meta property="og:url" content="https://builthealth.com/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#101110">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@500;600;700;800;900&family=Newsreader:ital,wght@1,500&display=swap">
   <style>
+    :root {
+      --bg: #101110;
+      --panel: #151815;
+      --line: #1E2A21;
+      --ink: #F4F6F3;
+      --muted: #8B948C;
+      --mint: #7BD9A0;
+      --green: #2F7D4A;
+      --amber: #FFB765;
+      --violet: #C4A8FF;
+      --coral: #FF9A8C;
+    }
     * { margin: 0; box-sizing: border-box; }
-    body { font-family: 'Geist', system-ui, sans-serif; background: #101110; color: #F4F6F3; min-height: 100vh; display: flex; flex-direction: column; }
-    main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 48px 24px; gap: 18px; }
-    .ring { width: 96px; height: 96px; border-radius: 48px; border: 8px solid #1E2A21; border-top-color: #7BD9A0; border-right-color: #7BD9A0; transform: rotate(-45deg); }
-    h1 { font-size: clamp(34px, 7vw, 56px); font-weight: 900; letter-spacing: -1px; }
-    .tagline { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: clamp(18px, 3.5vw, 24px); color: #7BD9A0; }
-    p.sub { color: #7A837C; font-size: 15px; max-width: 480px; line-height: 1.6; font-weight: 500; }
-    .badges { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
-    .badge { border: 1px solid #262B27; border-radius: 12px; padding: 10px 18px; color: #E2E8DF; font-size: 13.5px; font-weight: 700; }
-    .badge.soon { color: #647266; }
-    footer { display: flex; gap: 22px; justify-content: center; padding: 26px; border-top: 1px solid #1E2A21; }
-    footer a { color: #7A837C; font-size: 13px; font-weight: 600; text-decoration: none; }
-    footer a:hover { color: #7BD9A0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Geist', system-ui, -apple-system, sans-serif;
+      background: var(--bg); color: var(--ink);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    a { color: inherit; }
+
+    /* nav */
+    nav { position: sticky; top: 0; z-index: 20; background: rgba(16,17,16,.86); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 16.5px; letter-spacing: -.3px; text-decoration: none; }
+    .brand img { width: 28px; height: 28px; border-radius: 7px; }
+    .navlinks { display: flex; gap: 24px; }
+    .navlinks a { color: var(--muted); font-size: 14px; font-weight: 600; text-decoration: none; }
+    .navlinks a:hover { color: var(--mint); }
+    @media (max-width: 640px) { .navlinks { display: none; } }
+
+    /* hero */
+    .hero { padding: 76px 0 64px; display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
+    .eyebrow { font-size: 12.5px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: var(--mint); margin-bottom: 16px; }
+    h1 { font-size: clamp(38px, 5.4vw, 60px); font-weight: 900; letter-spacing: -1.6px; line-height: 1.06; }
+    .tagline { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-size: clamp(19px, 2.3vw, 25px); color: var(--mint); margin-top: 14px; }
+    .lede { color: #B6BFB7; font-size: 17px; margin-top: 20px; max-width: 500px; }
+    .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px; padding: 13px 20px; border-radius: 13px;
+      font-size: 14.5px; font-weight: 700; text-decoration: none; border: 1px solid var(--line);
+      background: var(--panel); color: var(--ink); transition: border-color .16s, transform .16s;
+    }
+    .btn:hover { border-color: #2F4A38; transform: translateY(-1px); }
+    .btn.primary { background: var(--green); border-color: var(--green); color: #fff; }
+    .btn.primary:hover { background: #368E55; border-color: #368E55; }
+    .btn small { display: block; font-size: 11px; font-weight: 600; opacity: .72; letter-spacing: .2px; }
+    .btn svg { flex: none; }
+    .phone { justify-self: center; width: 100%; max-width: 300px; }
+    .phone img {
+      width: 100%; height: auto; border-radius: 26px; border: 1px solid var(--line);
+      box-shadow: 0 34px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(123,217,160,.07);
+      display: block;
+    }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; gap: 42px; padding: 52px 0 46px; text-align: center; }
+      .lede { margin-left: auto; margin-right: auto; }
+      .cta { justify-content: center; }
+      .phone { max-width: 258px; }
+    }
+
+    /* wedge band */
+    .band { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #0C0E0C; padding: 60px 0; }
+    .band h2 { font-size: clamp(26px, 3.4vw, 37px); font-weight: 900; letter-spacing: -1px; line-height: 1.15; max-width: 760px; }
+    .band h2 em { font-family: 'Newsreader', Georgia, serif; font-style: italic; font-weight: 500; color: var(--mint); }
+    .band p { color: #A7B0A8; font-size: 16.5px; margin-top: 18px; max-width: 620px; }
+    .chain { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+    .chip { border: 1px solid var(--line); border-radius: 999px; padding: 7px 15px; font-size: 13px; font-weight: 700; color: #C8D1C9; background: var(--panel); }
+    .chip.top { border-color: #2F4A38; color: var(--mint); }
+
+    /* features */
+    .features { padding: 20px 0 10px; }
+    .feature { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; padding: 58px 0; border-bottom: 1px solid var(--line); }
+    .feature:last-child { border-bottom: 0; }
+    .feature.flip .copy { order: 2; }
+    .feature .shot { justify-self: center; width: 100%; max-width: 286px; }
+    .feature .shot img { width: 100%; height: auto; border-radius: 24px; border: 1px solid var(--line); box-shadow: 0 26px 60px rgba(0,0,0,.55); display: block; }
+    .kicker { font-size: 12px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+    .feature h3 { font-size: clamp(24px, 3vw, 32px); font-weight: 900; letter-spacing: -.9px; line-height: 1.14; }
+    .feature p { color: #A7B0A8; font-size: 16px; margin-top: 14px; }
+    .feature ul { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+    .feature li { color: #C8D1C9; font-size: 15px; font-weight: 500; padding-left: 24px; position: relative; }
+    .feature li::before { content: ''; position: absolute; left: 2px; top: 8px; width: 7px; height: 7px; border-radius: 4px; background: var(--mint); }
+    @media (max-width: 860px) {
+      .feature { grid-template-columns: 1fr; gap: 34px; padding: 44px 0; }
+      .feature.flip .copy { order: 0; }
+      .feature .shot { max-width: 250px; }
+    }
+
+    /* privacy */
+    .privacy { background: #0C0E0C; border-top: 1px solid var(--line); padding: 62px 0; }
+    .privacy h2 { font-size: clamp(24px, 3.2vw, 34px); font-weight: 900; letter-spacing: -1px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+    .card h4 { font-size: 15.5px; font-weight: 800; margin-bottom: 7px; }
+    .card p { color: var(--muted); font-size: 14.5px; }
+    @media (max-width: 760px) { .cards { grid-template-columns: 1fr; } }
+
+    /* closing */
+    .closing { padding: 74px 0; text-align: center; }
+    .closing h2 { font-size: clamp(30px, 4.4vw, 46px); font-weight: 900; letter-spacing: -1.4px; }
+    .closing .tagline { margin-top: 12px; }
+    .closing .cta { justify-content: center; margin-top: 28px; }
+
+    /* footer */
+    footer { border-top: 1px solid var(--line); padding: 34px 0 46px; }
+    .frow { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: center; }
+    .flinks { display: flex; gap: 22px; flex-wrap: wrap; }
+    .flinks a { color: var(--muted); font-size: 13.5px; font-weight: 600; text-decoration: none; }
+    .flinks a:hover { color: var(--mint); }
+    .disclaimer { color: #5C6A5E; font-size: 12.5px; margin-top: 22px; max-width: 720px; line-height: 1.6; }
+    .copyright { color: #5C6A5E; font-size: 13px; }
   </style>
 </head>
 <body>
-  <main>
-    <div class="ring" role="img" aria-label="Built Health protein ring"></div>
-    <h1>Built Health</h1>
-    <div class="tagline">Keep what you built.</div>
-    <p class="sub">The most accurate food tracker alive. We don't guess — we ask, we ground every number in evidence, and we remember. Protein-first nutrition, medication schedules, symptoms, and a Coach that listens.</p>
-    <div class="badges">
-      <span class="badge">iPhone — App Store</span>
-      <span class="badge soon">Android — coming soon</span>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/">
+      <img src="/img/icon.png" alt="">
+      Built Health
+    </a>
+    <div class="navlinks">
+      <a href="#accuracy">Accuracy</a>
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy</a>
+      <a href="/support.html">Support</a>
     </div>
-  </main>
-  <footer>
-    <a href="/privacy.html">Privacy</a>
-    <a href="/support.html">Support</a>
-  </footer>
+  </div>
+</nav>
+
+<header class="wrap hero">
+  <div>
+    <div class="eyebrow">One app for the long game</div>
+    <h1>Your health,<br>actually tracked.</h1>
+    <div class="tagline">Keep what you built.</div>
+    <p class="lede">What you eat, what you take, how you feel, and how you recover — in one place, grounded in evidence instead of guesswork.</p>
+    <div class="cta">
+      <a class="btn primary" href="#notify">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-5-5m5 5l5-5"/><path d="M4 21h16"/></svg>
+        <span>Get it on Android<small>Launching on Google Play</small></span>
+      </a>
+      <a class="btn" href="#notify">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.8c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8c-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3-.7s1.8.7 3 .7 2-1.1 2.8-2.2c.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.5-1-2.5-3.5zM14.2 5.9c.6-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.1 1.8-1 2.9 1.1.1 2.2-.6 2.8-1.4z"/></svg>
+        <span>iPhone<small>In beta — coming soon</small></span>
+      </a>
+    </div>
+  </div>
+  <div class="phone">
+    <img src="/img/1-hub.png" alt="Built Health home screen showing a protein ring, daily stats, and feature tiles" width="1080" height="2160" loading="eager">
+  </div>
+</header>
+
+<section class="band" id="accuracy">
+  <div class="wrap">
+    <h2>Every other tracker <em>silently guesses</em> what you ate. We ask.</h2>
+    <p>Point the camera at a plate and most apps hand you a confident number pulled out of thin air. Built Health runs an accuracy engine instead: it identifies what's actually there, asks the one question that matters, and shows you the evidence behind every gram — with an honest range instead of false precision.</p>
+    <div class="chain">
+      <span class="chip top">Nutrition label</span>
+      <span class="chip">Kitchen scale</span>
+      <span class="chip">Barcode</span>
+      <span class="chip">Restaurant menu</span>
+      <span class="chip">Your own corrections</span>
+      <span class="chip">Photo estimate</span>
+    </div>
+  </div>
+</section>
+
+<section class="wrap features" id="features">
+
+  <div class="feature">
+    <div class="copy">
+      <div class="kicker" style="color:var(--mint)">One Lens</div>
+      <h3>One camera. Everything it needs to know.</h3>
+      <p>No mode-picking. Point it at a plate, a barcode, a nutrition label, or even a restaurant receipt — it figures out what it's looking at and routes itself.</p>
+      <ul>
+        <li>Barcodes read live, as you point</li>
+        <li>Labels beat databases, automatically</li>
+        <li>Receipts become itemized meals</li>
+        <li>Or hold the mic and just say what you ate</li>
+      </ul>
+    </div>
+    <div class="shot"><img src="/img/2-onelens.png" alt="One Lens camera view scanning food" loading="lazy"></div>
+  </div>
+
+  <div class="feature flip">
+    <div class="copy">
+      <div class="kicker" style="color:var(--mint)">The evidence trail</div>
+      <h3>Numbers you can audit.</h3>
+      <p>Tap any meal to see exactly where its numbers came from: which source won, what the range is, and which items still need a second look. Protein leads, because muscle is what keeps you strong for decades.</p>
+      <ul>
+        <li>Honest ranges, never fake precision</li>
+        <li>Per-ingredient breakdown and sources</li>
+        <li>Conflicts surfaced instead of hidden</li>
+        <li>It learns your portions over time</li>
+      </ul>
+    </div>
+    <div class="shot"><img src="/img/7-evidence.png" alt="Evidence screen showing protein, calories, ranges, and per-component sources" loading="lazy"></div>
+  </div>
+
+  <div class="feature">
+    <div class="copy">
+      <div class="kicker" style="color:var(--violet)">Medications &amp; vitamins</div>
+      <h3>Never wonder if you took it.</h3>
+      <p>Add your meds and supplements — or photograph the bottle and let the app read it. Built Health builds the schedule, reminds you at the right times, flags what you missed, and estimates when your refill runs out.</p>
+      <ul>
+        <li>Timing intelligence: with food, empty stomach, weekly</li>
+        <li>Missed-dose banner the moment you open the app</li>
+        <li>Refill countdown before you run out</li>
+      </ul>
+    </div>
+    <div class="shot"><img src="/img/8-medication.png" alt="Medication schedule screen" loading="lazy"></div>
+  </div>
+
+  <div class="feature flip">
+    <div class="copy">
+      <div class="kicker" style="color:var(--coral)">Symptoms &amp; your Coach</div>
+      <h3>Tell a bad day from a bad pattern.</h3>
+      <p>Log how you feel in seconds and watch the month fill in. Patterns stop hiding, and your Coach keeps the context — so you walk into appointments with a record instead of a fuzzy memory.</p>
+      <ul>
+        <li>Calendar view of what flares and when</li>
+        <li>A private journal that remembers across months</li>
+        <li>Questions worth asking your doctor</li>
+      </ul>
+    </div>
+    <div class="shot"><img src="/img/9-symptoms.png" alt="Symptom calendar screen" loading="lazy"></div>
+  </div>
+
+</section>
+
+<section class="privacy" id="privacy">
+  <div class="wrap">
+    <h2>Private by design.</h2>
+    <div class="cards">
+      <div class="card">
+        <h4>Photos are never stored</h4>
+        <p>Meal photos are analyzed and discarded. They don't live on our servers.</p>
+      </div>
+      <div class="card">
+        <h4>Never sold, never shared</h4>
+        <p>Your data is never sold and never shared with advertisers, employers, or insurers.</p>
+      </div>
+      <div class="card">
+        <h4>Delete anything, anytime</h4>
+        <p>Remove a single record or your whole account — no email thread required.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap closing" id="notify">
+  <h2>Built for the long game.</h2>
+  <div class="tagline">Keep what you built.</div>
+  <div class="cta">
+    <a class="btn primary" href="mailto:hello@builthealth.com?subject=Tell%20me%20when%20Built%20Health%20launches">Tell me when it launches</a>
+    <a class="btn" href="/support.html">Questions?</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="frow">
+      <div class="copyright">© 2026 Built Health · InspiraCube</div>
+      <div class="flinks">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/support.html">Support</a>
+        <a href="/delete-account.html">Delete account</a>
+      </div>
+    </div>
+    <p class="disclaimer">Built Health is a consumer wellness app. It does not diagnose, treat, or give medical advice, and it is not a substitute for care from a qualified professional. If something concerns you, talk to your doctor.</p>
+  </div>
+</footer>
+
 </body>
 </html>
